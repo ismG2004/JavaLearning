@@ -8,4 +8,5 @@ public interface OperationUsers {
     public void getUsersByID(int userid);
     public Integer insertUsers(String name);
     public void deleteUsers();
+    public void generalInsertMethod(String name, String street);
 }
