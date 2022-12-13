@@ -11,7 +11,7 @@ public class MyConnectionPool implements ConnectionPool {
     private static final String DRIVER = "org.postgresql.Driver";
     private List<Connection> connectionPool = new ArrayList<>(DEFAULT_POOL_SIZE);
     private List<Connection> usedConnections = new ArrayList<>();
-    private static final int DEFAULT_POOL_SIZE = 10;
+    private static int DEFAULT_POOL_SIZE = 10;
 
 
     public void create() {
@@ -46,15 +46,13 @@ public class MyConnectionPool implements ConnectionPool {
 
     @Override
     public boolean releaseConnection(Connection connection) {
-        System.out.println("# RELEASING CONNECTION...");
         connectionPool.add(connection);
-        System.out.println("# CONNECTION RELEASED.");
         return usedConnections.remove(connection);
     }
 
     @Override
     public int getSize() {
-        return connectionPool.size();
+        return connectionPool.size() ;
     }
 
     @Override
