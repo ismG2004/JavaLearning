@@ -30,7 +30,9 @@ public class UsersMethods implements OperationUsers {
             PreparedStatement prStmt = connection.prepareStatement(
                     "SELECT userid, name from users where userid=?"
             );
+
             prStmt.setInt(1, userid);
+
             prStmt.executeUpdate();
             System.out.println("# Got users by id");
             prStmt.close();

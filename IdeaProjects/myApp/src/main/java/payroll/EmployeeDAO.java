@@ -2,29 +2,29 @@ package payroll;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.data.jpa.repository.JpaRepository;
+import payroll.model.Employee;
+
 import java.util.List;
 
 public class EmployeeDAO {
     private JdbcTemplate jdbcTemplate;
 
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
-//    public EmployeeDAO(JdbcTemplate jdbcTemplate) {
+//    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 //        this.jdbcTemplate = jdbcTemplate;
 //    }
 
+    public EmployeeDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     public List<Employee> getAll() {
-        return jdbcTemplate.query("SELECT * FROM Employee", new EmployeeMapper());
+        return jdbcTemplate.query("SELECT * FROM employee", new EmployeeMapper());
     }
 
     public Employee getById(int id) {
         return jdbcTemplate.query(
                 "SELECT * FROM Employee where id=?", new Object[]{id}, new EmployeeMapper()
-                )
-                .stream().findAny().orElse(null);
+                ).stream().findAny().orElse(null);
     }
 
     @Transactional
